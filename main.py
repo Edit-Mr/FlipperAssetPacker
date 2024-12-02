@@ -10,7 +10,7 @@ import random
 class ImageConverterGUI:
     def __init__(self, root):
         self.root = root
-        self.root.title("PNG to BM Converter")
+        self.root.title("Momentum Image Converter")
 
         # Store the list of PNG files
         self.png_files = list(pathlib.Path('.').glob("*.png"))
@@ -19,7 +19,7 @@ class ImageConverterGUI:
             return
 
         # Select random image for preview
-        self.current_image_path = random.choice(self.png_files)
+        self.current_image_index = random.randint(0, len(self.png_files) - 1)
 
         # Create main frame
         main_frame = ttk.Frame(root, padding="10")
@@ -31,15 +31,15 @@ class ImageConverterGUI:
 
         # Original image preview
         self.original_label = ttk.Label(preview_frame, text="Original:")
-        self.original_label.pack()
+        self.original_label.grid(row=0, column=0, padx=10)
         self.original_preview = ttk.Label(preview_frame)
-        self.original_preview.pack()
+        self.original_preview.grid(row=1, column=0)
 
         # Converted preview
         self.converted_label = ttk.Label(preview_frame, text="Preview:")
-        self.converted_label.pack()
+        self.converted_label.grid(row=0, column=1, padx=10)
         self.converted_preview = ttk.Label(preview_frame)
-        self.converted_preview.pack()
+        self.converted_preview.grid(row=1, column=1)
 
         # Controls
         controls_frame = ttk.Frame(main_frame)
@@ -78,25 +78,28 @@ class ImageConverterGUI:
         )
         self.bg_color_check.pack(pady=5)
 
-        # Random image button
-        ttk.Button(
-            controls_frame,
-            text="Try Another Random Image",
-            command=self.select_random_image
-        ).pack(pady=5)
+        # Navigation buttons
+        nav_frame = ttk.Frame(main_frame)
+        nav_frame.pack(fill=tk.X, pady=10)
 
-        # Convert all button
-        ttk.Button(
-            controls_frame,
-            text="Convert All Files",
-            command=self.convert_all_files
-        ).pack(pady=5)
+        self.prev_button = ttk.Button(nav_frame, text="Previous", command=self.show_previous_image)
+        self.prev_button.pack(side=tk.LEFT, padx=10)
+
+        self.next_button = ttk.Button(nav_frame, text="Next", command=self.show_next_image)
+        self.next_button.pack(side=tk.LEFT)
 
         # Status label
         self.status_var = tk.StringVar()
         ttk.Label(main_frame, textvariable=self.status_var).pack(pady=5)
 
-        # Initial preview
+        # Initial preview update after window is drawn
+        self.root.bind("<Configure>", self.on_resize)
+
+        # Initial preview update
+        self.update_preview()
+
+    def on_resize(self, event):
+        """Handle window resize events and update preview"""
         self.update_preview()
 
     def convert_image(self, img_path, threshold, dither=False):
@@ -142,21 +145,24 @@ class ImageConverterGUI:
     def update_preview(self, *args):
         """Update the preview images"""
         try:
+            # Ensure the preview size is at least a reasonable value
+            width = self.root.winfo_width() // 2 or 128
+            height = self.root.winfo_height() // 2 or 64
+
             # Load and resize original
-            original = Image.open(self.current_image_path)
-            print(self.current_image_path)
-            original.thumbnail((self.root.winfo_width() // 2, self.root.winfo_height() // 2))
+            original = Image.open(self.png_files[self.current_image_index])
+            original.thumbnail((width, height))
             original_photo = ImageTk.PhotoImage(original)
             self.original_preview.configure(image=original_photo)
             self.original_preview.image = original_photo
 
             # Create and show preview
             _, preview = self.convert_image(
-                self.current_image_path,
+                self.png_files[self.current_image_index],
                 self.threshold_var.get(),
                 self.dither_var.get()
             )
-            preview.thumbnail((self.root.winfo_width() // 2, self.root.winfo_height() // 2))
+            preview.thumbnail((width, height))
             preview_photo = ImageTk.PhotoImage(preview)
             self.converted_preview.configure(image=preview_photo)
             self.converted_preview.image = preview_photo
@@ -167,14 +173,14 @@ class ImageConverterGUI:
         except Exception as e:
             self.status_var.set(f"Error updating preview: {e}")
 
-    def select_random_image(self):
-        """Select a new random image for preview"""
-        if len(self.png_files) > 1:
-            current_idx = self.png_files.index(self.current_image_path)
-            available_files = self.png_files[:current_idx] + self.png_files[current_idx + 1:]
-            self.current_image_path = random.choice(available_files)
-        else:
-            self.current_image_path = self.png_files[0]
+    def show_previous_image(self):
+        """Show the previous image in the list"""
+        self.current_image_index = (self.current_image_index - 1) % len(self.png_files)
+        self.update_preview()
+
+    def show_next_image(self):
+        """Show the next image in the list"""
+        self.current_image_index = (self.current_image_index + 1) % len(self.png_files)
         self.update_preview()
 
     def convert_all_files(self):
