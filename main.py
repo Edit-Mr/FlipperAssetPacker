@@ -88,6 +88,10 @@ class ImageConverterGUI:
         self.next_button = ttk.Button(nav_frame, text="Next", command=self.show_next_image)
         self.next_button.pack(side=tk.LEFT)
 
+        # Convert all button
+        self.convert_button = ttk.Button(nav_frame, text="Convert All", command=self.convert_all_files)
+        self.convert_button.pack(side=tk.RIGHT, padx=10)
+
         # Status label
         self.status_var = tk.StringVar()
         ttk.Label(main_frame, textvariable=self.status_var).pack(pady=5)
