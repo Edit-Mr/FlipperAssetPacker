@@ -172,11 +172,35 @@
                 font-weight: 900;
             }
 
-            section{
+            section {
                 font-size: 1.5rem;
             }
-            a{
+            a {
                 color: #ff8200;
+            }
+
+            .rick {
+                animation: rotate 2s infinite linear alternate;
+            }
+
+            @keyframes rotate {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(10deg);
+                }
+            }
+
+            div,
+            li {
+                opacity: 0;
+                transition: all 1s;
+                transform: translateY(1em);
+            }
+            .ed {
+                opacity: 1;
+                transform: translateY(0);
             }
         </style>
     </head>
@@ -208,7 +232,7 @@
                         Flipper device with their favorite photos or animation.
                     </p>
                 </div>
-                <img src="img/rick.webp" alt="" />
+                <img class="rick" src="img/rick.webp" alt="" />
             </div>
             <h2 class="center how">How It Works?</h2>
             <div class="flex">
@@ -309,5 +333,23 @@ python main.py
         <footer>
             <p>© 2024 <a href="https://elvismao.com">Elvis Mao</a></p>
         </footer>
+        <script>
+            function isElementInViewport(el) {
+                const rect = el.getBoundingClientRect();
+                return rect.bottom < 0 || rect.top > window.innerHeight;
+            }
+
+            function addClassToVisibleElements() {
+                var aosElements = document.querySelectorAll("div,li");
+                aosElements.forEach(function (aosElement) {
+                    if (!isElementInViewport(aosElement))
+                        aosElement.classList.add("ed");
+                    else aosElement.classList.remove("ed");
+                });
+            }
+
+            document.addEventListener("scroll", addClassToVisibleElements);
+            addClassToVisibleElements();
+        </script>
     </body>
 </html>
