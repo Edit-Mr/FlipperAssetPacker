@@ -1,0 +1,313 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            @import url("img/GravityBold8.ttf");
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body {
+                line-height: 1.5;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont,
+                    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+                    "Helvetica Neue", sans-serif;
+                font-weight: bold;
+            }
+
+            header > div,
+            main,
+            section > div {
+                max-width: 1100px;
+                margin: 0 auto;
+                padding: 2rem;
+            }
+            h1,
+            h2,
+            h3 {
+                font-family: "GravityBold8";
+            }
+            header {
+                position: relative;
+            }
+
+            header > div {
+                padding-top: 3rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: white;
+            }
+            header::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: calc(100% - 5rem);
+                background: #ff8200;
+                z-index: -1;
+            }
+
+            header::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 10rem;
+                background: url("img/flipper.png") no-repeat center bottom/cover;
+                z-index: -2;
+            }
+
+            header a {
+                color: white;
+                text-decoration: none;
+                background: #000;
+                padding: 1.2rem 1.8rem;
+                margin-top: 1rem;
+                display: block;
+                width: fit-content;
+                font-size: 1.2rem;
+            }
+
+            h1,
+            h1::after {
+                font-size: 3rem;
+                margin-bottom: 1.5rem;
+            }
+
+            h1 {
+                position: relative;
+                color: #000;
+            }
+
+            h1::after {
+                content: "Flipper Asset Packer";
+                position: absolute;
+                top: 0.3rem;
+                left: 0.3rem;
+                width: 100%;
+                color: #fff;
+                z-index: -1;
+            }
+
+            header p,
+            header a {
+                font-family: "GravityBold8";
+                font-size: 1.3rem;
+                margin-bottom: 1.5rem;
+            }
+
+            section,
+            footer {
+                color: #fff;
+                background-color: #000;
+            }
+            footer {
+                color: #808080;
+                text-align: center;
+            }
+            .center {
+                text-align: center;
+            }
+            h3,
+            h2 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+            h2.how {
+                margin-top: 4rem;
+                margin-bottom: 4rem;
+            }
+            h2 {
+                margin-top: 4rem;
+                margin-bottom: 1rem;
+            }
+            .flex {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                margin-bottom: 1rem;
+            }
+            .flex > div {
+                flex: 6;
+            }
+            .flex > img {
+                flex: 4;
+                height: 15rem;
+                object-fit: contain;
+            }
+            .features {
+                display: flex;
+                justify-content: center;
+                gap: 2rem;
+            }
+            .features img {
+                display: block;
+                width: 100%;
+            }
+            .features h3 {
+                font-size: 1.5rem;
+                margin-top: 2.5rem;
+                margin-bottom: 0.8rem;
+            }
+            ul {
+                margin-left: 2rem;
+                margin-bottom: 2rem;
+            }
+            li {
+                margin-bottom: 0.5rem;
+                font-weight: 400;
+            }
+            strong {
+                font-weight: 900;
+            }
+
+            section{
+                font-size: 1.5rem;
+            }
+            a{
+                color: #ff8200;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div>
+                <div>
+                    <h1>Flipper Asset Packer</h1>
+                    <p>By Elvis Mao</p>
+                    <a
+                        href="https://github.com/Edit-Mr/FlipperAssetPacker"
+                        class="github"
+                        >GitHub</a
+                    >
+                </div>
+                <img src="img/gui.webp" alt="" />
+            </div>
+        </header>
+        <main>
+            <div class="flex">
+                <div>
+                    <h3>Create Your Own Flipper Wallpapers!</h3>
+                    <p>
+                        Are you ready to spice up your Flipper's wallpaper? With
+                        the Flipper Asset Packer, you can easily convert your
+                        own images into custom wallpapers for your device! This
+                        tool is designed for anyone who loves customizing their
+                        digital space and wants to add a personal touch to their
+                        Flipper device with their favorite photos or animation.
+                    </p>
+                </div>
+                <img src="img/rick.webp" alt="" />
+            </div>
+            <h2 class="center how">How It Works?</h2>
+            <div class="flex">
+                <img src="img/file.webp" alt="" />
+                <div>
+                    <h3>Drop Your Photo</h3>
+                    <p>
+                        Simply place the photo you'd like to use in the same
+                        directory as the tool.
+                    </p>
+                </div>
+            </div>
+            <div class="flex">
+                <div>
+                    <h3>Customize Settings</h3>
+                    <p>
+                        Simply place the photo you'd like to use in the same
+                        directory as the tool.
+                    </p>
+                </div>
+                <img src="img/gui.webp" alt="" />
+            </div>
+            <div class="flex">
+                <img src="img/flash.webp" alt="" />
+                <div>
+                    <h3>Upload to Flipper</h3>
+                    <p>
+                        Place the output file in your access pack folder, adjust
+                        the animation speed, and voila! You’ve got yourself a
+                        personalized wallpaper on your Flipper.
+                    </p>
+                </div>
+            </div>
+            <div class="center">
+                <h2>Features</h2>
+                <p>
+                    All image size would be automatically scale and cropped.
+                    Never gonna give you up.
+                </p>
+            </div>
+            <div class="features center">
+                <div>
+                    <h3>Threshold</h3>
+                    <img src="img/threshold.webp" alt="" />
+                </div>
+                <div>
+                    <h3>Dithering</h3>
+                    <img src="img/dithering.webp" alt="" />
+                </div>
+                <div>
+                    <h3>Background</h3>
+                    <img src="img/background.webp" alt="" />
+                </div>
+            </div>
+            <h2>Why You'll Love It</h2>
+            <ul>
+                <li>
+                    <strong>Fully Customizable:</strong> From image scaling and
+                    cropping to background color choices, you can fine-tune
+                    every detail to make your wallpaper stand out.
+                </li>
+                <li>
+                    <strong>Fast and Simple:</strong> No technical know-how
+                    required. Just upload your photo and let the tool handle the
+                    rest!
+                </li>
+                <li>
+                    <strong>Endless Possibilities:</strong> Whether it’s a
+                    picture of your pet, a cool design, or your latest
+                    adventure, you can bring any image to life on your Flipper.
+                </li>
+                <li>
+                    <strong>Instant Preview:</strong> View your changes in real
+                    time! Make adjustments and see exactly how they’ll look on
+                    your device.
+                </li>
+            </ul>
+            <p>Never gonna let you down.</p>
+        </main>
+        <section>
+            <div>
+                <h2>HOW to run?</h2>
+                <pre>
+git clone https://github.com/Edit-Mr/FlipperAssetPacker.git
+pip install -r requirements.txt
+python main.py
+                </pre>
+                <p>
+                    Or download
+                    <a
+                        href="https://github.com/Edit-Mr/FlipperAssetPacker/releases/latest"
+                        >.exe</a
+                    >
+                    from GitHub release
+                </p>
+            </div>
+        </section>
+        <footer>
+            <p>© 2024 <a href="https://elvismao.com">Elvis Mao</a></p>
+        </footer>
+    </body>
+</html>
